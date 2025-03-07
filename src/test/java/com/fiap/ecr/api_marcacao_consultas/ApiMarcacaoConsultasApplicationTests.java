@@ -1,4 +1,4 @@
-package com.example.api_marcacao_consultas;
+package com.fiap.ecr.api_marcacao_consultas;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
