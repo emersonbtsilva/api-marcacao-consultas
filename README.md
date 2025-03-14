@@ -20,14 +20,14 @@ Este projeto é uma API para gerenciar a marcação de consultas médicas, permi
 - **Java**: Linguagem principal do projeto.
 - **Spring Boot**: Framework para simplificar a configuração e o desenvolvimento da aplicação.
 - **Maven**: Gerenciador de dependências e automação de build.
-- **Banco de Dados**: (Especifique aqui o banco de dados utilizado, por exemplo, MySQL, PostgreSQL, H2, etc.)
-- **Docker**: (Se aplicável, mencione o uso de Docker para containerização da aplicação.)
+- **Banco de Dados**: H2
+
 
 ## Pré-requisitos
 
 - **Java 11** ou superior instalado.
 - **Maven 3.6** ou superior instalado.
-- **Banco de dados** configurado e em execução. (Forneça detalhes específicos sobre a configuração do banco de dados.)
+- **Banco de dados** 
 
 ## Como Executar o Projeto
 
