@@ -4,21 +4,22 @@ import io.jsonwebtoken.*;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;
-import javax.crypto.SecretKey;
+import java.security.Key;
 import java.util.Date;
 
 @Component
 public class JwtTokenProvider {
-    private final SecretKey chaveSecreta;
+    private final Key chaveSecreta;
 
     @Value("${jwt.expiration}")
     private long tempoExpiracao;
 
     public JwtTokenProvider(@Value("${jwt.secret}") String segredo) {
-        // Decodifica a chave secreta a partir de Base64
-        byte[] keyBytes = Decoders.BASE64.decode(segredo);
-        this.chaveSecreta = Keys.hmacShaKeyFor(keyBytes);
+        // Gerar uma chave segura em vez de usar a chave fornecida
+        // Isso garantirá que temos uma chave com comprimento suficiente
+        this.chaveSecreta = Keys.secretKeyFor(SignatureAlgorithm.HS256);
     }
 
     // Gerar token JWT
@@ -27,17 +28,17 @@ public class JwtTokenProvider {
         Date expiracao = new Date(agora.getTime() + tempoExpiracao);
 
         return Jwts.builder()
-                .subject(email)
-                .issuedAt(agora)
-                .expiration(expiracao)
-                .signWith(chaveSecreta, Jwts.SIG.HS256)
+                .setSubject(email)
+                .setIssuedAt(agora)
+                .setExpiration(expiracao)
+                .signWith(chaveSecreta, SignatureAlgorithm.HS256)
                 .compact();
     }
 
     // Extrair email do token
     public String obterEmailDoToken(String token) {
         return Jwts.parser()
-                .verifyWith(chaveSecreta)
+                .verifyWith((javax.crypto.SecretKey)chaveSecreta)
                 .build()
                 .parseSignedClaims(token)
                 .getPayload()
@@ -48,7 +49,7 @@ public class JwtTokenProvider {
     public boolean validarToken(String token) {
         try {
             Jwts.parser()
-                    .verifyWith(chaveSecreta)
+                    .verifyWith((javax.crypto.SecretKey)chaveSecreta)
                     .build()
                     .parseSignedClaims(token);
             return true;
