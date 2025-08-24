@@ -29,13 +29,7 @@ public class UsuarioService {
     }
 
     public List<Usuario> buscarMedicosPorEspecialidade(String especialidade) {
-        // Esta implementação depende de como você relaciona médicos com especialidades
-        // Se você tiver um relacionamento direto, pode usar:
-        // return usuarioRepository.findByTipoAndEspecialidade("MEDICO", especialidade);
-
-        // Caso contrário, você precisará implementar uma lógica personalizada
-        // Esta é uma implementação simplificada:
-        return usuarioRepository.findByTipo("MEDICO");
+        return usuarioRepository.findByTipoAndEspecialidade("MEDICO", especialidade);
     }
 
     public Usuario salvarUsuario(Usuario usuario) {
@@ -117,5 +111,17 @@ public class UsuarioService {
         }
 
         return resultado.toString();
+    }
+
+    // Método para admin alterar senha de qualquer usuário
+    public Usuario alterarSenha(Long usuarioId, String novaSenha) {
+        Usuario usuario = usuarioRepository.findById(usuarioId)
+                .orElseThrow(() -> new RuntimeException("Usuário não encontrado"));
+
+        // Criptografa a nova senha
+        String senhaCriptografada = passwordEncoder.encode(novaSenha);
+        usuario.setSenha(senhaCriptografada);
+
+        return usuarioRepository.save(usuario);
     }
 }

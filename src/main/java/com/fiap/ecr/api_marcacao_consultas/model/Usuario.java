@@ -12,4 +12,5 @@ public class Usuario {
     private String email;
     private String senha;
     private String tipo; // Paciente, Médico ou Admin
+    private String especialidade;
 }
