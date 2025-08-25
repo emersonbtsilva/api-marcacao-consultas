@@ -1,10 +1,13 @@
-# 🏥 API de Marcação de Consultas
+NOME: EMERSON SILVA
+RM: 96288
+
+# API de Marcação de Consultas
 
 Esta é uma aplicação desenvolvida com **Spring Boot** que permite o gerenciamento de consultas médicas. Ela oferece funcionalidades como cadastro de usuários (médicos e pacientes), gerenciamento de especialidades médicas e agendamento de consultas.
 
 ---
 
-## 📐 Arquitetura
+## Arquitetura
 
 A aplicação segue uma arquitetura em camadas típica de projetos Spring:
 
@@ -16,7 +19,7 @@ A aplicação segue uma arquitetura em camadas típica de projetos Spring:
 
 ---
 
-## 🧍 Entidades Principais
+## Entidades Principais
 
 ### 1. Usuário
 - Representa tanto **pacientes** quanto **médicos**.
@@ -41,7 +44,7 @@ A aplicação segue uma arquitetura em camadas típica de projetos Spring:
 
 ---
 
-## 🔐 Segurança
+## Segurança
 
 A API utiliza autenticação baseada em **JWT (JSON Web Token)**.
 
